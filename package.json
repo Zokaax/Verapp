@@ -1,19 +1,18 @@
 {
   "name": "verapp",
   "module": "index.ts",
-  "type": "module",
-  "private": true,
+  "dependencies": {
+    "browser-sync": "^3.0.4",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
-  "scripts":{
-    "dev":"bun run app.js"
+  "private": true,
+  "scripts": {
+    "dev": "bun run app.js",
+    "browser": "browser-sync start --proxy 'http://localhost:3000' --files '**/*.html, **/*.ejs, **/*.css, **/*.js'"
   },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0"
-  }
+  "type": "module"
 }
