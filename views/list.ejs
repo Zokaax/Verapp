@@ -3,38 +3,35 @@
 
     <!-- Page Heading -->
     <h1 class="my-4">Catálogo
-      <small>Nanologic</small>
+        <small>Nanologic</small>
     </h1>
 
     <div class="row">
 
 
-    <%
-    if (supabaseItems && supabaseItems.length > 0) { 
-        supabaseItems.forEach((item, index) => { 
+        <%
+    if (supabaseList && supabaseList.length > 0) { 
+        supabaseList.forEach((item, index) => { 
     %>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card h-100">
-          <!-- <a href="#"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt=""></a> -->
-          <div class="card-body">
-            <h4 class="card-title">
-              <span><%= item.tipo_producto %> <%= item.marca ? item.marca : '' %></span>
-            </h4>
-            <p class="card-text"><%= item.nombre_producto %></p>
-          </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <!-- <a href="#"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt=""></a> -->
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <span><%= item.tipo_producto %> <%= item.marca ? item.marca : '' %></span>
+                    </h4>
+                    <p class="card-text"><%= item.nombre_producto %></p>
+                </div>
+            </div>
         </div>
-      </div>
-
-
-    <%
+        <%
         })
     }
     %>
 
     </div>
     <!-- /.row -->
-  
+
     <!-- Pagination -->
     <!-- <ul class="pagination justify-content-center">
       <li class="page-item">
@@ -59,6 +56,6 @@
         </a>
       </li>
     </ul> -->
-  
-  </div>
-  <!-- /.container -->
+
+</div>
+<!-- /.container -->

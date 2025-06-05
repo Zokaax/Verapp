@@ -1,21 +1,17 @@
 {
-  "name": "verapp",
-  "module": "app.js",
-  "dependencies": {
-    "@supabase/supabase-js": "^2.49.10",
-    "browser-sync": "^3.0.4",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "private": true,
-  "scripts": {
-    "dev": "node --watch app.js",
-    "browser": "browser-sync start --proxy 'http://localhost:3000' --files '**/*.html, **/*.ejs, **/*.css, **/*.js'"
-  },
-  "type": "module"
+    "name": "verapp",
+    "type": "module",
+    "dependencies": {
+        "@supabase/supabase-js": "2.49.10",
+        "browser-sync": "^3.0.4",
+        "cors": "2.8.5",
+        "dotenv": "16.5.0",
+        "ejs": "3.1.10",
+        "express": "5.1.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "dev": "node --watch app.js",
+        "browser": "browser-sync start --proxy 'http://localhost:3000' --files '**/*.html, **/*.ejs, **/*.css, **/*.js'"
+    }
 }
