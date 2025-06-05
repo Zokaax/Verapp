@@ -1,61 +1,137 @@
-<!-- Page Content -->
 <div class="container">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
 
-    <!-- Page Heading -->
+
     <h1 class="my-4">Catálogo
         <small>Nanologic</small>
     </h1>
 
     <div class="row">
 
-
         <%
     if (supabaseList && supabaseList.length > 0) { 
         supabaseList.forEach((item, index) => { 
     %>
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="card h-100">
-                <!-- <a href="#"><img class="card-img-top" src="https://via.placeholder.com/700x400" alt=""></a> -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 align-items-stretch">
+            <button class="card w-100">
+                <% 
+                if (item.imageURL && item.imageURL.length > 0){
+              %>
+                <img class="card-img-top img-fluid product-main-image" src="<%= item.imageURL[0] %>" alt="<%= item.nombre_producto %>" data-other-images="<%= JSON.stringify(item.imageURL) %>">
+                <% 
+              }
+              %>
                 <div class="card-body">
-                    <h4 class="card-title">
-                        <span><%= item.tipo_producto %> <%= item.marca ? item.marca : '' %></span>
-                    </h4>
+                    <h4 class="card-title"><%= item.tipo_producto %> <%= item.marca ? item.marca : '' %></h4>
                     <p class="card-text"><%= item.nombre_producto %></p>
                 </div>
-            </div>
+
+            </button>
         </div>
         <%
         })
     }
     %>
-
     </div>
-    <!-- /.row -->
-
-    <!-- Pagination -->
-    <!-- <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">1</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul> -->
-
 </div>
-<!-- /.container -->
+
+
+<style>
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border-color: #0001;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .card-title {
+        margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+        font-size: 0.9em;
+    }
+
+    .product-main-image {
+        transition: opacity 0.3s ease-in-out;
+    }
+</style>
+
+<script>
+    // public/js/main.js
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const productImages = document.querySelectorAll('.product-main-image');
+
+        productImages.forEach(img => {
+            let originalSrc = img.src;
+            let otherImages = [];
+            let currentImageIndex = 0;
+            let hoverInterval;
+
+            try {
+                const dataAttr = img.getAttribute('data-other-images');
+                if (dataAttr) {
+                    otherImages = JSON.parse(dataAttr);
+                }
+            } catch (e) {
+                console.error('Error parsing data-other-images:', e);
+                otherImages = [];
+            }
+
+            if (otherImages.length === 0) {
+                return;
+            }
+
+            img.addEventListener('mouseenter', () => {
+                currentImageIndex = 0;
+                hoverInterval = setInterval(() => {
+                    currentImageIndex = (currentImageIndex + 1) % otherImages.length;
+                    img.src = otherImages[currentImageIndex];
+                }, 500);
+            });
+
+            img.addEventListener('mouseleave', () => {
+                clearInterval(hoverInterval);
+                img.src = originalSrc;
+            });
+        });
+    });
+</script>
