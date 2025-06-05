@@ -32,7 +32,7 @@ const home = Router();
 
 const __imgCarouselDirectory = process.env.IMGCAROUSELURL
 const __imgCatalogDirectory = process.env.IMGCATALOGURL
-const __IMGROOT = process.env.IMGROOT
+const __imgDirectory = process.env.IMGDIRECTORY
 const __TablaView = process.env.TABLE_VIEW
 const __TablaList = process.env.TABLE_LIST
 
@@ -124,7 +124,7 @@ home.get('/', async (req, res) => {
                     item.imageURL[index] = __imgCatalogDirectory + img_name
                 })
             } else {
-                item.imageURL = [__IMGROOT + 'default.png']
+                item.imageURL = [__imgDirectory + 'default.png']
             }
         })
     }
